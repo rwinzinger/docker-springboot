@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @RestController
 @RequestMapping(value = "/api/v1")
 public class AccountController {
-    @Value("${eureka.instance.nonSecurePort}")
+    @Value("${some.config.item}")
     String name = "dummy";
 
     @RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "application/json")
