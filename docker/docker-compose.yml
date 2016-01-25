@@ -1,0 +1,41 @@
+#web:
+#  image: t.b.d.
+#  container_name: webapp-container
+
+configuration-server:
+  image: ralph/configserver
+  container_name: configserver
+  # in the container, the config-server exposes its services on port 18773
+  # let's map this to port 8888
+  ports:
+   - "8888:18773"
+  # we need two environment variables
+  # - to tell the config-server where the registry is
+  # - to tell the config-server which kind of config (development, production) to serve
+  environment:
+    EUREKA_SERVICE_URL: service-registry-1
+    SPRING_CLOUD_CONFIG_LABEL: production
+  external_links:
+   - service-registry-1
+#  volumes:
+#   - ./volumes/config-server/logs:/var/log/configserver
+
+
+#
+#  ports:
+#   - "5000:5000"
+#  volumes:
+#   - .:/code
+#  links:
+#   - redis
+#
+#customer-service:
+#  image: customer-service
+#  container_name: customer-service-1
+#
+#account-service:
+#  image: account-service
+#  container_name: account-service-1
+
+#database:
+#  image: mongo
